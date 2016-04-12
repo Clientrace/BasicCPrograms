@@ -1,0 +1,6 @@
+(A,B,E)
+(B,C,null)
+(C,null,D)
+(E,F,H)
+(F,null,G)
+(H,I,J)

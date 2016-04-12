@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <conio.h>
+#include <queue>
+#include <windows.h>
+using namespace std;
+
+int advisors[13], counter=12;
+queue<int> chosen;
+
+void refill()
+{
+	int a, b=0, temp[12];
+	for(a=0;a<13;a++)
+	{
+		if(advisors[a]!=0)
+		{
+			temp[b]=advisors[a];
+			b++;	
+		}
+	}
+	for(a=0;a<counter;a++)
+	{
+		advisors[a]=temp[a];
+	}	
+}
+
+main()
+{
+	int a, b, c, start, interval;
+	for(;;)
+	{
+		counter=12;
+		for(a=0;a<13;a++)
+		{advisors[a]=a+1;printf("%d ", advisors[a]);}
+		printf("\nInput the starting point: ");
+		scanf("%d", &start);
+		if(start==0)
+		{
+			break;
+		}
+		if(start>13)
+		{
+			break;
+		}
+		printf("Input the interval: ");
+		scanf("%d", &interval);
+		if(interval>100)
+		{
+			break;
+		}
+		for(a=start-1, b=1, c=0;c!=5;a++, b++)
+		{
+			if(a>counter)
+			{
+				a=0;
+			}
+			if(b==interval)
+			{
+				b=1;
+				chosen.push(advisors[a]);
+				c++;
+				counter--;
+				advisors[a]=0;
+				refill();
+			}
+		}
+		while(!chosen.empty())
+		{
+			a=chosen.front();
+			chosen.pop();
+			printf("%d ", a);
+		}
+		printf("\nPress any key to continue...\n");
+		getch();
+		system("cls");
+	}
+}
